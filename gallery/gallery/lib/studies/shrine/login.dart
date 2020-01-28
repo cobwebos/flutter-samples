@@ -111,7 +111,7 @@ class _UsernameTextField extends StatelessWidget {
     final TextEditingController _usernameController = TextEditingController();
 
     return PrimaryColorOverride(
-      color: shrineBrown900,
+      color: colorScheme.primaryVariant,
       child: Container(
         child: TextField(
           controller: _usernameController,
@@ -137,7 +137,7 @@ class _PasswordTextField extends StatelessWidget {
     final TextEditingController _passwordController = TextEditingController();
 
     return PrimaryColorOverride(
-      color: shrineBrown900,
+      color: colorScheme.primaryVariant,
       child: Container(
         child: TextField(
           controller: _passwordController,

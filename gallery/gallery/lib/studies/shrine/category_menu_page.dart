@@ -59,8 +59,10 @@ class CategoryMenuPage extends StatelessWidget {
         .body2
         .copyWith(fontSize: isDesktop ? 17 : 19);
 
-    final TextStyle unselectedCategoryTextStyle = selectedCategoryTextStyle
-        .copyWith(color: shrineBrown900.withOpacity(0.6));
+    final TextStyle unselectedCategoryTextStyle =
+        selectedCategoryTextStyle.copyWith(
+      color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.6),
+    );
 
     final double indicatorHeight = (isDesktop ? 28 : 30) *
         GalleryOptions.of(context).textScaleFactor(context);
@@ -95,11 +97,13 @@ class CategoryMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDesktop = isDisplayDesktop(context);
 
-    final TextStyle logoutTextStyle =
-        Theme.of(context).textTheme.body2.copyWith(
-              fontSize: isDesktop ? 17 : 19,
-              color: shrineBrown900.withOpacity(0.6),
-            );
+    final TextStyle logoutTextStyle = Theme.of(context)
+        .textTheme
+        .body2
+        .copyWith(
+          fontSize: isDesktop ? 17 : 19,
+          color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.6),
+        );
 
     if (isDesktop) {
       return AnimatedBuilder(
@@ -108,7 +112,7 @@ class CategoryMenuPage extends StatelessWidget {
           excluding: !menuPageIsVisible(context),
           child: Material(
             child: Container(
-              color: shrinePink100,
+              color: Theme.of(context).colorScheme.primary,
               width: desktopCategoryMenuPageWidth(context: context),
               child: Column(
                 children: [
@@ -171,7 +175,7 @@ class CategoryMenuPage extends StatelessWidget {
             child: Center(
               child: Container(
                 padding: const EdgeInsets.only(top: 40),
-                color: shrinePink100,
+                color: Theme.of(context).colorScheme.primary,
                 child: ListView(
                   children: [
                     for (final category in categories)

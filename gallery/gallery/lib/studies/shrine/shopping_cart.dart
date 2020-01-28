@@ -41,7 +41,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
     final ThemeData localTheme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: shrinePink50,
+      backgroundColor: localTheme.colorScheme.secondary,
       body: SafeArea(
         child: Container(
           child: ScopedModelDescendant<AppStateModel>(
@@ -93,7 +93,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                       ),
-                      color: shrinePink100,
+                      color: localTheme.colorScheme.primary,
                       splashColor: shrineBrown600,
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 12),
@@ -318,8 +318,8 @@ class ShoppingCartRow extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const Divider(
-                    color: shrineBrown900,
+                  Divider(
+                    color: localTheme.colorScheme.primaryVariant,
                     height: 10,
                   ),
                 ],

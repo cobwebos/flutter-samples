@@ -498,7 +498,7 @@ class _ExpandingBottomSheetState extends State<ExpandingBottomSheet>
           ),
         ),
         elevation: 4,
-        color: shrinePink50,
+        color: Theme.of(context).colorScheme.secondary,
         child: _cartIsVisible
             ? _buildShoppingCartPage()
             : _buildThumbnails(context, numProducts),

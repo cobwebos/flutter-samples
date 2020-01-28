@@ -121,9 +121,11 @@ class _ShrineAppState extends State<ShrineApp> with TickerProviderStateMixin {
           ),
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
-          theme: shrineTheme.copyWith(
-            platform: GalleryOptions.of(context).platform,
-          ),
+          theme: GalleryOptions.of(context).enableStudyTheming
+              ? shrineTheme.copyWith(
+                  platform: GalleryOptions.of(context).platform,
+                )
+              : null,
           // L10n settings.
           localizationsDelegates: GalleryLocalizations.localizationsDelegates,
           supportedLocales: GalleryLocalizations.supportedLocales,
