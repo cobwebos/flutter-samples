@@ -248,7 +248,22 @@ class _SettingsPageState extends State<SettingsPage> {
         onTapSetting: () => onTapSetting(_ExpandableSetting.theme),
         isExpanded: expandedSettingId == _ExpandableSetting.theme,
       ),
-      SlowMotionSetting(),
+      SettingsSwitchListItem(
+        title: GalleryLocalizations.of(context).settingsSlowMotion,
+        value: options.timeDilation != 1.0,
+        onChanged: (isOn) => GalleryOptions.update(
+          context,
+          options.copyWith(timeDilation: isOn ? 5.0 : 1.0),
+        ),
+      ),
+      SettingsSwitchListItem(
+        title: GalleryLocalizations.of(context).settingsStudyTheming,
+        value: options.enableStudyTheming,
+        onChanged: (isOn) => GalleryOptions.update(
+          context,
+          options.copyWith(enableStudyTheming: isOn),
+        ),
+      ),
     ];
 
     return Material(

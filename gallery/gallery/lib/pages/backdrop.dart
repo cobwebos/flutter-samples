@@ -279,7 +279,7 @@ class _BackdropState extends State<Backdrop>
                       color: Theme.of(context).colorScheme.secondaryVariant,
                       child: Container(
                         constraints: const BoxConstraints(
-                          maxHeight: 560,
+                          maxHeight: 600,
                           maxWidth: desktopSettingsWidth,
                           minWidth: desktopSettingsWidth,
                         ),

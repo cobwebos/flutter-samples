@@ -19,12 +19,22 @@ class DisplayOption {
   DisplayOption(this.title, {this.subtitle});
 }
 
-class SlowMotionSetting extends StatelessWidget {
+class SettingsSwitchListItem extends StatelessWidget {
+  const SettingsSwitchListItem({
+    Key key,
+    this.title,
+    this.value,
+    this.onChanged,
+  }) : super(key: key);
+
+  final String title;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final options = GalleryOptions.of(context);
 
     return Container(
       margin: settingItemHeaderMargin,
@@ -43,7 +53,7 @@ class SlowMotionSetting extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      GalleryLocalizations.of(context).settingsSlowMotion,
+                      title,
                       style: textTheme.subhead.apply(
                         color: colorScheme.onSurface,
                       ),
@@ -56,11 +66,8 @@ class SlowMotionSetting extends StatelessWidget {
               padding: const EdgeInsetsDirectional.only(end: 8),
               child: Switch(
                 activeColor: colorScheme.primary,
-                value: options.timeDilation != 1.0,
-                onChanged: (isOn) => GalleryOptions.update(
-                  context,
-                  options.copyWith(timeDilation: isOn ? 5.0 : 1.0),
-                ),
+                value: value,
+                onChanged: onChanged,
               ),
             ),
           ],

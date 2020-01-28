@@ -44,6 +44,7 @@ class GalleryOptions {
     Locale locale,
     this.timeDilation,
     this.platform,
+    this.enableStudyTheming,
   })  : _textScaleFactor = textScaleFactor,
         _locale = locale;
 
@@ -53,6 +54,7 @@ class GalleryOptions {
   final Locale _locale;
   final double timeDilation;
   final TargetPlatform platform;
+  final bool enableStudyTheming;
 
   // We use a sentinel value to indicate the system text scale option. By
   // default, return the actual text scale factor, otherwise return the
@@ -98,6 +100,7 @@ class GalleryOptions {
     Locale locale,
     double timeDilation,
     TargetPlatform platform,
+    bool enableStudyTheming,
   }) {
     return GalleryOptions(
       themeMode: themeMode ?? this.themeMode,
@@ -106,6 +109,7 @@ class GalleryOptions {
       locale: locale ?? this.locale,
       timeDilation: timeDilation ?? this.timeDilation,
       platform: platform ?? this.platform,
+      enableStudyTheming: enableStudyTheming ?? this.enableStudyTheming,
     );
   }
 
@@ -117,7 +121,8 @@ class GalleryOptions {
       customTextDirection == other.customTextDirection &&
       locale == other.locale &&
       timeDilation == other.timeDilation &&
-      platform == other.platform;
+      platform == other.platform &&
+      enableStudyTheming == other.enableStudyTheming;
 
   @override
   int get hashCode => hashValues(
@@ -127,6 +132,7 @@ class GalleryOptions {
         locale,
         timeDilation,
         platform,
+        enableStudyTheming,
       );
 
   static GalleryOptions of(BuildContext context) {

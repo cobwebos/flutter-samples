@@ -519,6 +519,10 @@
   "@settingsSlowMotion": {
     "description": "Title for slow motion setting."
   },
+  "settingsStudyTheming": "Study Theming",
+  "@settingsStudyTheming": {
+    "description": "Title for setting to enable the theme on each Material Design study."
+  },
   "settingsAbout": "About Flutter Gallery",
   "@settingsAbout": {
     "description": "Title for information button."

@@ -1004,6 +1004,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Platform mechanics"),
         "settingsSlowMotion":
             MessageLookupByLibrary.simpleMessage("Slow motion"),
+        "settingsStudyTheming":
+            MessageLookupByLibrary.simpleMessage("Study Theming"),
         "settingsSystemDefault": MessageLookupByLibrary.simpleMessage("System"),
         "settingsTextDirection":
             MessageLookupByLibrary.simpleMessage("Text direction"),

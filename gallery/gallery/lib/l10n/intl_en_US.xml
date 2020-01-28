@@ -478,6 +478,10 @@
     description="Title for slow motion setting."
     >Slow motion</string>
   <string
+    name="settingsStudyTheming"
+    description="Title for setting to enable the theme on each Material Design study."
+    >Study Theming</string>
+  <string
     name="settingsAbout"
     description="Title for information button."
     >About Flutter Gallery</string>

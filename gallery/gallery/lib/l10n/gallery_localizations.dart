@@ -4054,6 +4054,14 @@ class GalleryLocalizations {
         desc: r'Title for slow motion setting.');
   }
 
+  String get settingsStudyTheming {
+    return Intl.message('Study Theming',
+        locale: _localeName,
+        name: 'settingsStudyTheming',
+        desc:
+            r'Title for setting to enable the theme on each Material Design study.');
+  }
+
   String get settingsSystemDefault {
     return Intl.message('System',
         locale: _localeName,

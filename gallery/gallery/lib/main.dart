@@ -43,6 +43,7 @@ class GalleryApp extends StatelessWidget {
         locale: null,
         timeDilation: timeDilation,
         platform: defaultTargetPlatform,
+        enableStudyTheming: true,
       ),
       child: Builder(
         builder: (context) {
