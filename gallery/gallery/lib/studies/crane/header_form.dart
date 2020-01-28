@@ -72,7 +72,7 @@ class _HeaderTextField extends StatelessWidget {
           ),
         ),
         contentPadding: EdgeInsets.all(16),
-        fillColor: cranePurple700,
+        fillColor: Theme.of(context).accentColor,
         filled: true,
         hintText: field.title,
         hasFloatingPlaceholder: false,

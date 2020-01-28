@@ -32,12 +32,16 @@ class _CraneAppState extends State<CraneApp> {
       locale: GalleryOptions.of(context).locale,
       initialRoute: '/',
       onGenerateRoute: _getRoute,
-      theme: craneTheme.copyWith(
-        platform: GalleryOptions.of(context).platform,
-      ),
-      darkTheme: craneTheme.copyWith(
-        platform: GalleryOptions.of(context).platform,
-      ),
+      theme: GalleryOptions.of(context).enableStudyTheming
+          ? craneTheme.copyWith(
+              platform: GalleryOptions.of(context).platform,
+            )
+          : null,
+      darkTheme: GalleryOptions.of(context).enableStudyTheming
+          ? craneTheme.copyWith(
+              platform: GalleryOptions.of(context).platform,
+            )
+          : null,
       home: ApplyTextOptions(
         child: Backdrop(
           frontLayer: Container(),

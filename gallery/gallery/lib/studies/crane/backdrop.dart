@@ -126,13 +126,13 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
     final textScaleFactor = GalleryOptions.of(context).textScaleFactor(context);
 
     return Material(
-      color: cranePurple800,
+      color: Theme.of(context).colorScheme.primary,
       child: Padding(
         padding: EdgeInsets.only(top: 12),
         child: DefaultFocusTraversal(
           policy: ReadingOrderTraversalPolicy(),
           child: Scaffold(
-            backgroundColor: cranePurple800,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             appBar: AppBar(
               brightness: Brightness.dark,
               elevation: 0,
