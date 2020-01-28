@@ -25,9 +25,11 @@ class RallyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'Rally',
       debugShowCheckedModeBanner: false,
-      theme: _buildRallyTheme().copyWith(
-        platform: GalleryOptions.of(context).platform,
-      ),
+      theme: GalleryOptions.of(context).enableStudyTheming
+          ? _buildRallyTheme().copyWith(
+              platform: GalleryOptions.of(context).platform,
+            )
+          : null,
       localizationsDelegates: GalleryLocalizations.localizationsDelegates,
       supportedLocales: GalleryLocalizations.supportedLocales,
       locale: GalleryOptions.of(context).locale,

@@ -40,7 +40,7 @@ class AccountsView extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              color: RallyColors.inputBackground,
+              color: Theme.of(context).inputDecorationTheme.fillColor,
               padding: EdgeInsetsDirectional.only(start: 24),
               height: double.infinity,
               alignment: AlignmentDirectional.centerStart,
@@ -85,7 +85,7 @@ class _AccountDetail extends StatelessWidget {
           style: textTheme.body2.copyWith(fontSize: 20),
         ),
         SizedBox(height: 8),
-        Container(color: RallyColors.primaryBackground, height: 1),
+        Container(color: Theme.of(context).primaryColor, height: 1),
       ],
     );
   }

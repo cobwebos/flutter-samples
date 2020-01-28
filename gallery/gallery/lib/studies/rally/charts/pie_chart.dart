@@ -165,6 +165,7 @@ class _AnimatedRallyPieChart extends AnimatedWidget {
           maxFraction: animation.value,
           total: total,
           segments: segments,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         child: Container(
           height: constraints.maxHeight,
@@ -189,12 +190,17 @@ class _AnimatedRallyPieChart extends AnimatedWidget {
 }
 
 class _RallyPieChartOutlineDecoration extends Decoration {
-  const _RallyPieChartOutlineDecoration(
-      {this.maxFraction, this.total, this.segments});
+  const _RallyPieChartOutlineDecoration({
+    this.maxFraction,
+    this.total,
+    this.segments,
+    this.backgroundColor,
+  });
 
   final double maxFraction;
   final double total;
   final List<RallyPieChartSegment> segments;
+  final Color backgroundColor;
 
   @override
   BoxPainter createBoxPainter([VoidCallback onChanged]) {
@@ -202,17 +208,23 @@ class _RallyPieChartOutlineDecoration extends Decoration {
       maxFraction: maxFraction,
       wholeAmount: total,
       segments: segments,
+      backgroundColor: backgroundColor,
     );
   }
 }
 
 class _RallyPieChartOutlineBoxPainter extends BoxPainter {
-  _RallyPieChartOutlineBoxPainter(
-      {this.maxFraction, this.wholeAmount, this.segments});
+  _RallyPieChartOutlineBoxPainter({
+    this.maxFraction,
+    this.wholeAmount,
+    this.segments,
+    this.backgroundColor,
+  });
 
   final double maxFraction;
   final double wholeAmount;
   final List<RallyPieChartSegment> segments;
+  final Color backgroundColor;
   static const double wholeRadians = 2 * math.pi;
   static const double spaceRadians = wholeRadians / 180;
 
@@ -259,7 +271,7 @@ class _RallyPieChartOutlineBoxPainter extends BoxPainter {
 
     // Paint a smaller inner circle to cover the painted arcs, so they are
     // display as segments.
-    final bgPaint = Paint()..color = RallyColors.primaryBackground;
+    final bgPaint = Paint()..color = backgroundColor;
     canvas.drawArc(innerRect, 0, 2 * math.pi, true, bgPaint);
   }
 

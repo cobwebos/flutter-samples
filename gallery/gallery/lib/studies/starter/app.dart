@@ -64,30 +64,32 @@ class _StarterAppState extends State<StarterApp> {
           ),
         ),
       ),
-      theme: ThemeData(
-        primaryColor: _primaryColor,
-        highlightColor: Colors.transparent,
-        colorScheme: ColorScheme(
-          primary: _primaryColor,
-          primaryVariant: const Color(0xFF3700B3),
-          secondary: const Color(0xFF03DAC6),
-          secondaryVariant: const Color(0xFF018786),
-          background: Colors.white,
-          surface: Colors.white,
-          onBackground: Colors.black,
-          error: const Color(0xFFB00020),
-          onError: Colors.white,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.black,
-          brightness: Brightness.light,
-        ),
-        dividerTheme: DividerThemeData(
-          thickness: 1,
-          color: const Color(0xFFE5E5E5),
-        ),
-        platform: GalleryOptions.of(context).platform,
-      ),
+      theme: GalleryOptions.of(context).enableStudyTheming
+          ? ThemeData(
+              primaryColor: _primaryColor,
+              highlightColor: Colors.transparent,
+              colorScheme: ColorScheme(
+                primary: _primaryColor,
+                primaryVariant: const Color(0xFF3700B3),
+                secondary: const Color(0xFF03DAC6),
+                secondaryVariant: const Color(0xFF018786),
+                background: Colors.white,
+                surface: Colors.white,
+                onBackground: Colors.black,
+                error: const Color(0xFFB00020),
+                onError: Colors.white,
+                onPrimary: Colors.white,
+                onSecondary: Colors.black,
+                onSurface: Colors.black,
+                brightness: Brightness.light,
+              ),
+              dividerTheme: DividerThemeData(
+                thickness: 1,
+                color: const Color(0xFFE5E5E5),
+              ),
+              platform: GalleryOptions.of(context).platform,
+            )
+          : null,
     );
   }
 }

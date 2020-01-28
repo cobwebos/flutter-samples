@@ -173,7 +173,7 @@ class _AlertsView extends StatelessWidget {
             ),
           ),
           for (AlertData alert in alerts) ...[
-            Container(color: RallyColors.primaryBackground, height: 1),
+            Container(color: Theme.of(context).primaryColor, height: 1),
             _Alert(alert: alert),
           ]
         ],
