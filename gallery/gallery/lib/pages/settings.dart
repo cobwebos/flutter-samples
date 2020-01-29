@@ -45,16 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
   _ExpandableSetting expandedSettingId;
   Map<String, String> _localeNativeNames;
 
-  void onTapSetting(_ExpandableSetting settingId) {
-    setState(() {
-      if (expandedSettingId == settingId) {
-        expandedSettingId = null;
-      } else {
-        expandedSettingId = settingId;
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -66,14 +56,10 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         );
 
-    // When closing settings, also shrink expanded setting.
-    widget.isSettingsOpenNotifier.addListener(() {
-      if (!widget.isSettingsOpenNotifier.value) {
-        setState(() {
-          expandedSettingId = null;
-        });
-      }
-    });
+//    // When closing settings, also shrink expanded setting.
+//    widget.isSettingsOpenNotifier.addListener(() {
+//      }
+//    });
   }
 
   /// Given a [Locale], returns a [DisplayOption] with its native name for a
@@ -167,8 +153,8 @@ class _SettingsPageState extends State<SettingsPage> {
           context,
           options.copyWith(textScaleFactor: newTextScale),
         ),
-        onTapSetting: () => onTapSetting(_ExpandableSetting.textScale),
-        isExpanded: expandedSettingId == _ExpandableSetting.textScale,
+//        onTapSetting: () => onTapSetting(_ExpandableSetting.textScale),
+//        isExpanded: expandedSettingId == _ExpandableSetting.textScale,
       ),
       SettingsListItem<CustomTextDirection>(
         title: GalleryLocalizations.of(context).settingsTextDirection,
@@ -188,8 +174,8 @@ class _SettingsPageState extends State<SettingsPage> {
           context,
           options.copyWith(customTextDirection: newTextDirection),
         ),
-        onTapSetting: () => onTapSetting(_ExpandableSetting.textDirection),
-        isExpanded: expandedSettingId == _ExpandableSetting.textDirection,
+//        onTapSetting: () => onTapSetting(_ExpandableSetting.textDirection),
+//        isExpanded: expandedSettingId == _ExpandableSetting.textDirection,
       ),
       SettingsListItem<Locale>(
         title: GalleryLocalizations.of(context).settingsLocale,
@@ -206,8 +192,8 @@ class _SettingsPageState extends State<SettingsPage> {
             options.copyWith(locale: newLocale),
           );
         },
-        onTapSetting: () => onTapSetting(_ExpandableSetting.locale),
-        isExpanded: expandedSettingId == _ExpandableSetting.locale,
+//        onTapSetting: () => onTapSetting(_ExpandableSetting.locale),
+//        isExpanded: expandedSettingId == _ExpandableSetting.locale,
       ),
       SettingsListItem<TargetPlatform>(
         title: GalleryLocalizations.of(context).settingsPlatformMechanics,
@@ -224,8 +210,8 @@ class _SettingsPageState extends State<SettingsPage> {
           context,
           options.copyWith(platform: newPlatform),
         ),
-        onTapSetting: () => onTapSetting(_ExpandableSetting.platform),
-        isExpanded: expandedSettingId == _ExpandableSetting.platform,
+//        onTapSetting: () => onTapSetting(_ExpandableSetting.platform),
+//        isExpanded: expandedSettingId == _ExpandableSetting.platform,
       ),
       SettingsListItem<ThemeMode>(
         title: GalleryLocalizations.of(context).settingsTheme,
@@ -245,8 +231,8 @@ class _SettingsPageState extends State<SettingsPage> {
           context,
           options.copyWith(themeMode: newThemeMode),
         ),
-        onTapSetting: () => onTapSetting(_ExpandableSetting.theme),
-        isExpanded: expandedSettingId == _ExpandableSetting.theme,
+//        onTapSetting: () => onTapSetting(_ExpandableSetting.theme),
+//        isExpanded: expandedSettingId == _ExpandableSetting.theme,
       ),
       SlowMotionSetting(),
     ];
