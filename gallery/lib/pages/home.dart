@@ -32,9 +32,6 @@ const _horizontalDesktopPadding = 81.0;
 const _carouselHeightMin = 200.0 + 2 * _carouselItemMargin;
 const _desktopCardsPerPage = 4;
 
-const _shrineTitle = 'Shrine';
-const _rallyTitle = 'Rally';
-const _craneTitle = 'Crane';
 const _homeCategoryMaterial = 'MATERIAL';
 const _homeCategoryCupertino = 'CUPERTINO';
 
@@ -53,9 +50,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var carouselHeight = _carouselHeight(.7, context);
     final isDesktop = isDisplayDesktop(context);
+    final localizations = GalleryLocalizations.of(context);
     final carouselCards = <Widget>[
+      // New studies should also be added to data/demos.dart.
       _CarouselCard(
-        title: _shrineTitle,
+        title: shrineTitle,
         subtitle: GalleryLocalizations.of(context).shrineDescription,
         asset: 'assets/studies/shrine_card.png',
         assetDark: 'assets/studies/shrine_card_dark.png',
@@ -64,7 +63,7 @@ class HomePage extends StatelessWidget {
         navigatorKey: NavigatorKeys.shrine,
       ),
       _CarouselCard(
-        title: _rallyTitle,
+        title: rallyTitle,
         subtitle: GalleryLocalizations.of(context).rallyDescription,
         textColor: RallyColors.accountColors[0],
         asset: 'assets/studies/rally_card.png',
@@ -73,7 +72,7 @@ class HomePage extends StatelessWidget {
         navigatorKey: NavigatorKeys.rally,
       ),
       _CarouselCard(
-        title: _craneTitle,
+        title: craneTitle,
         subtitle: GalleryLocalizations.of(context).craneDescription,
         asset: 'assets/studies/crane_card.png',
         assetDark: 'assets/studies/crane_card_dark.png',
@@ -105,106 +104,114 @@ class HomePage extends StatelessWidget {
         _DesktopCategoryItem(
           title: _homeCategoryMaterial,
           imageString: 'assets/icons/material/material.png',
-          demos: materialDemos(context),
+          demos: materialDemos(localizations),
         ),
         _DesktopCategoryItem(
           title: _homeCategoryCupertino,
           imageString: 'assets/icons/cupertino/cupertino.png',
-          demos: cupertinoDemos(context),
+          demos: cupertinoDemos(localizations),
         ),
         _DesktopCategoryItem(
           title: GalleryLocalizations.of(context).homeCategoryReference,
           imageString: 'assets/icons/reference/reference.png',
-          demos: referenceDemos(context),
+          demos: referenceDemos(localizations),
         ),
       ];
 
       return Scaffold(
-        body: ListView(
-          padding: EdgeInsetsDirectional.only(
-            top: isDesktop ? firstHeaderDesktopTopPadding : 21,
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: _horizontalDesktopPadding,
-              ),
-              child: ExcludeSemantics(child: _GalleryHeader()),
+        body: KeyedSubtree(
+          key: const ValueKey<String>(
+              'GalleryDemoList'), // So the tests can find this ListView
+          child: ListView(
+            padding: EdgeInsetsDirectional.only(
+              top: isDesktop ? firstHeaderDesktopTopPadding : 21,
             ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: _horizontalDesktopPadding,
+                ),
+                child: ExcludeSemantics(child: _GalleryHeader()),
+              ),
 
-            /// TODO: When Focus widget becomes better remove dummy Focus
-            /// variable.
+              /// TODO: When Focus widget becomes better remove dummy Focus
+              /// variable.
 
-            /// This [Focus] widget grabs focus from the settingsIcon,
-            /// when settings isn't open.
-            /// The container following the Focus widget isn't wrapped with
-            /// Focus because anytime FocusScope.of(context).requestFocus() the
-            /// focused widget will be skipped. We want to be able to focus on
-            /// the container which is why we created this Focus variable.
-            Focus(
-              focusNode:
-                  InheritedBackdropFocusNodes.of(context).backLayerFocusNode,
-              child: SizedBox(),
-            ),
-            Container(
-              height: carouselHeight,
-              child: _DesktopCarousel(children: carouselCards),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: _horizontalDesktopPadding,
+              /// This [Focus] widget grabs focus from the settingsIcon,
+              /// when settings isn't open.
+              /// The container following the Focus widget isn't wrapped with
+              /// Focus because anytime FocusScope.of(context).requestFocus() the
+              /// focused widget will be skipped. We want to be able to focus on
+              /// the container which is why we created this Focus variable.
+              Focus(
+                focusNode:
+                    InheritedBackdropFocusNodes.of(context).backLayerFocusNode,
+                child: SizedBox(),
               ),
-              child: _CategoriesHeader(),
-            ),
-            Container(
-              height: 585,
-              padding: const EdgeInsets.symmetric(
-                horizontal: _horizontalDesktopPadding,
+              Container(
+                height: carouselHeight,
+                child: _DesktopCarousel(children: carouselCards),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: spaceBetween(28, desktopCategoryItems),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: _horizontalDesktopPadding,
+                ),
+                child: _CategoriesHeader(),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: _horizontalDesktopPadding,
-                bottom: 81,
-                end: _horizontalDesktopPadding,
-                top: 109,
+              Container(
+                height: 585,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: _horizontalDesktopPadding,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: spaceBetween(28, desktopCategoryItems),
+                ),
               ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    Theme.of(context).colorScheme.brightness == Brightness.dark
-                        ? 'assets/logo/flutter_logo.png'
-                        : 'assets/logo/flutter_logo_color.png',
-                    excludeFromSemantics: true,
-                  ),
-                  Expanded(
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.end,
-                      children: [
-                        SettingsAbout(),
-                        SettingsFeedback(),
-                        SettingsAttribution(),
-                      ],
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: _horizontalDesktopPadding,
+                  bottom: 81,
+                  end: _horizontalDesktopPadding,
+                  top: 109,
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      Theme.of(context).colorScheme.brightness ==
+                              Brightness.dark
+                          ? 'assets/logo/flutter_logo.png'
+                          : 'assets/logo/flutter_logo_color.png',
+                      excludeFromSemantics: true,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.end,
+                        children: [
+                          SettingsAbout(),
+                          SettingsFeedback(),
+                          SettingsAttribution(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     } else {
       return Scaffold(
-        body: _AnimatedHomePage(
-          isSplashPageAnimationFinished:
-              SplashPageAnimation.of(context).isFinished,
-          carouselCards: carouselCards,
+        body: KeyedSubtree(
+          key: const ValueKey<String>('GalleryDemoList'),
+          child: _AnimatedHomePage(
+            isSplashPageAnimationFinished:
+                SplashPageAnimation.of(context).isFinished,
+            carouselCards: carouselCards,
+          ),
         ),
       );
     }
@@ -322,51 +329,56 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
 
   @override
   Widget build(BuildContext context) {
+    final localizations = GalleryLocalizations.of(context);
     return Stack(
       children: [
-        ListView(
-          children: [
-            SizedBox(height: 8),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: _horizontalPadding),
-              child: ExcludeSemantics(child: _GalleryHeader()),
-            ),
-            _Carousel(
-              children: widget.carouselCards,
-              animationController: _animationController,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: _horizontalPadding),
-              child: _CategoriesHeader(),
-            ),
-            _AnimatedCategoryItem(
-              startDelayFraction: 0.00,
-              controller: _animationController,
-              child: CategoryListItem(
-                title: _homeCategoryMaterial,
-                imageString: 'assets/icons/material/material.png',
-                demos: materialDemos(context),
+        KeyedSubtree(
+          key: const ValueKey<String>(
+              'GalleryDemoList'), // So the tests can find this ListView
+          child: ListView(
+            children: [
+              SizedBox(height: 8),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                child: ExcludeSemantics(child: _GalleryHeader()),
               ),
-            ),
-            _AnimatedCategoryItem(
-              startDelayFraction: 0.05,
-              controller: _animationController,
-              child: CategoryListItem(
-                title: _homeCategoryCupertino,
-                imageString: 'assets/icons/cupertino/cupertino.png',
-                demos: cupertinoDemos(context),
+              _Carousel(
+                children: widget.carouselCards,
+                animationController: _animationController,
               ),
-            ),
-            _AnimatedCategoryItem(
-              startDelayFraction: 0.10,
-              controller: _animationController,
-              child: CategoryListItem(
-                title: GalleryLocalizations.of(context).homeCategoryReference,
-                imageString: 'assets/icons/reference/reference.png',
-                demos: referenceDemos(context),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                child: _CategoriesHeader(),
               ),
-            ),
-          ],
+              _AnimatedCategoryItem(
+                startDelayFraction: 0.00,
+                controller: _animationController,
+                child: CategoryListItem(
+                  title: _homeCategoryMaterial,
+                  imageString: 'assets/icons/material/material.png',
+                  demos: materialDemos(localizations),
+                ),
+              ),
+              _AnimatedCategoryItem(
+                startDelayFraction: 0.05,
+                controller: _animationController,
+                child: CategoryListItem(
+                  title: _homeCategoryCupertino,
+                  imageString: 'assets/icons/cupertino/cupertino.png',
+                  demos: cupertinoDemos(localizations),
+                ),
+              ),
+              _AnimatedCategoryItem(
+                startDelayFraction: 0.10,
+                controller: _animationController,
+                child: CategoryListItem(
+                  title: GalleryLocalizations.of(context).homeCategoryReference,
+                  imageString: 'assets/icons/reference/reference.png',
+                  demos: referenceDemos(localizations),
+                ),
+              ),
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.topCenter,
