@@ -150,6 +150,7 @@ Future<void> runDemos(List<String> demos, FlutterDriver driver) async {
   final SerializableFinder demoList = find.byValueKey('GalleryDemoList');
   String currentDemoCategory;
 
+  print('tapping Material');
   // Expand category demos
   await driver.tap(find.text('MATERIAL'));
 //  await driver.tap(find.text('CUPERTINO'));
@@ -211,20 +212,23 @@ void main([List<String> args = const <String>[]]) {
       print('setting up driver');
       driver = await FlutterDriver.connect();
 
+      print('getting demos');
+      // See _handleMessages() in transitions_perf.dart.
+      _allDemos = List<String>.from(
+          json.decode(await driver.requestData('demoNames')) as List<dynamic>);
+      if (_allDemos.isEmpty) throw 'no demo names found';
+
+      print(_allDemos);
+
       print('waiting for first frame to be rasterized');
 
       // Wait for the first frame to be rasterized.
-      await driver.waitUntilFirstFrameRasterized();
+//      await driver.waitUntilFirstFrameRasterized();
 
       if (args.contains('--with_semantics')) {
         print('Enabeling semantics...');
         await driver.setSemantics(true);
       }
-
-      // See _handleMessages() in transitions_perf.dart.
-      _allDemos = List<String>.from(
-          json.decode(await driver.requestData('demoNames')) as List<dynamic>);
-      if (_allDemos.isEmpty) throw 'no demo names found';
     });
 
     tearDownAll(() async {
